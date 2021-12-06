@@ -1,21 +1,23 @@
-import Tippy from "@tippyjs/react/headless";
-import CardTooltip from "./CardTooltip";
+import CustomTippy from "../CustomTippy";
+import { Link } from "react-router-dom";
 
 function LandingSection({ title }) {
   return (
     <div>
-      <a
-        href="#"
-        className="uppercase text-lg tracking-widest hover:text-active"
-      >
-        Trending Now
-      </a>
+      <div className="flex justify-between">
+        <Link
+          to="/"
+          className="uppercase text-lg font-semibold hover:text-active"
+        >
+          {title}
+        </Link>
+        <Link to="/" className="text-xs hover:text-active">
+          View All
+        </Link>
+      </div>
       <div className="grid grid-cols-results mt-5 gap-8">
-        <Tippy
-          render={(attrs) => <CardTooltip {...attrs} />}
-          placement="right-start"
-        >
-          <div className="group relative">
+        <CustomTippy>
+          <Link to="/anime/7290/komi-san" className="group relative">
             <div className="mb-3 w-full h-card-result">
               <img
                 src="/images/komi.png"
@@ -23,28 +25,11 @@ function LandingSection({ title }) {
                 className="w-full h-full object-cover"
               />
             </div>
-            <a href="#" className="mt-2 group-hover:text-active">
+            <div className="mt-2 group-hover:text-active">
               Komi-san wa, Komyushou desu.
-            </a>
-          </div>
-        </Tippy>
-        <Tippy
-          render={(attrs) => <CardTooltip {...attrs} />}
-          placement="right-start"
-        >
-          <div className="group relative">
-            <div className="mb-3 w-full h-card-result">
-              <img
-                src="/images/komi.png"
-                alt=""
-                className="w-full h-full object-cover"
-              />
             </div>
-            <a href="#" className="mt-2 group-hover:text-active">
-              Komi-san wa, Komyushou desu.
-            </a>
-          </div>
-        </Tippy>
+          </Link>
+        </CustomTippy>
       </div>
     </div>
   );

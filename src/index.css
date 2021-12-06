@@ -30,6 +30,40 @@ body {
   transform: rotate(45deg);
 }
 
+#tooltip[data-placement^="top"] > #arrow {
+  bottom: -4px;
+}
+
+#tooltip[data-placement^="bottom"] > #arrow {
+  top: -4px;
+}
+
+#tooltip[data-placement^="left"] > #arrow {
+  right: -4px;
+}
+
+#tooltip[data-placement^="right"] > #arrow {
+  left: -4px;
+}
+
+/* Custom Scrollbar */
+
+/* 
+    = = = = = =
+    = Firefox =
+    = = = = = = 
+*/
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #453a49;
+}
+
+/* 
+    = = = = = =
+    =  Chrome =
+    = = = = = = 
+*/
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
