@@ -9,7 +9,8 @@ import DetailSocial from "./components/detail/DetailSocial";
 import DetailCharacter from "./components/detail/DetailCharacter";
 import HomePage from "./pages/HomePage";
 import Layout from "./pages/Layout";
-
+import NotFound from "./pages/NotFound";
+import TrendingPage from "./pages/TrendingPage";
 function App() {
   return (
     <div className="App ">
@@ -17,6 +18,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="anime/search">
+            <Route index element={<HomePage />} />
+            <Route path="trending" element={<TrendingPage />} />
+          </Route>
         </Route>
         <Route path="anime/:id/:name" element={<DetailPage />}>
           <Route index element={<DetailOverview />} />
@@ -26,7 +31,7 @@ function App() {
           <Route path="stats" element={<DetailStats />} />
           <Route path="social" element={<DetailSocial />} />
         </Route>
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

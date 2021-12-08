@@ -11,12 +11,16 @@ import {
   formatList,
 } from "../data/filterData";
 import FilterSelectedItem from "./filters/FilterSelectedItem";
+import { useSelector } from "react-redux";
+import { selectTitle } from "../features/filter/filterSlice";
 
 function Filter() {
-  const [genres, setGenres] = useState(genresList);
-  const [years, setYears] = useState(getYearsList());
-  const [seasons, setSeasons] = useState(seasonsList);
-  const [format, setFormat] = useState(formatList);
+  const title = useSelector(selectTitle);
+
+  const genres = genresList;
+  const years = getYearsList();
+  const seasons = seasonsList;
+  const format = formatList;
   const [filterSelected, setFilterSelected] = useState({
     search: "",
     genres: [],
@@ -43,6 +47,8 @@ function Filter() {
 
   return (
     <div className="mb-8">
+      {title && <h1 className="mb-10 text-3xl font-bold">Trending Anime</h1>}
+
       <div className="grid grid-cols-filter-wrap items-center">
         <div className="grid grid-cols-filter gap-8 ">
           {/* Search */}

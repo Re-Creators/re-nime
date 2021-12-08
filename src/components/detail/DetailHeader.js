@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-
+import parse from "html-react-parser";
 import { BsChevronDown, BsFillHeartFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 
 const MAX_OVERVIEW_WORD = 1236;
 
-function DetailHeader({ overview }) {
+function DetailHeader({ overview, bannerImg, coverImg, title }) {
   const [isTrancuted, setIsTruncated] = useState(null);
 
   useEffect(() => {
@@ -25,21 +25,21 @@ function DetailHeader({ overview }) {
         {/* Cover Image */}
         <div
           className="w-full h-detail-cover bg-center bg-cover"
-          style={{ backgroundImage: 'url("/images/sample_cover.jpg")' }}
+          style={{ backgroundImage: `url("${bannerImg}")` }}
         >
           <div className="w-full h-full bg-cover-shadow"></div>
         </div>
         {/* Detail */}
         <div
-          className="grid grid-cols-detail gap-10  mx-auto min-w-container max-w-container"
+          className="grid grid-cols-detail gap-10  mx-auto min-w-container max-w-container pb-4"
           style={{ minHeight: "250px" }}
         >
           {/* Poster */}
           <div className="-mt-28">
             <img
-              src="/images/komi.png"
+              src={coverImg}
               alt=""
-              className="w-full object-contain"
+              className="w-full object-contain rounded-md shadow-md"
             />
             <div className="mt-5 text-white text-sm flex justify-between h-9">
               <button className=" rounded-md flex items-center h-full">
@@ -56,15 +56,13 @@ function DetailHeader({ overview }) {
             </div>
           </div>
           {/* Overview */}
-          <div className="mt-3 text-white ">
-            <div>
-              <h1 className="font-semibold text-lg">
-                Komi-san wa, Komyushou desu.{" "}
-              </h1>
+          <div className="mt-3 text-white relative">
+            <div className="mb-10">
+              <h1 className="font-semibold text-lg">{title}</h1>
               <p className="py-3 text-sm max-w-text group relative ">
                 {isTrancuted === false
-                  ? overview
-                  : truncateString(overview, MAX_OVERVIEW_WORD)}
+                  ? parse(overview)
+                  : parse(truncateString(overview, MAX_OVERVIEW_WORD))}
                 {isTrancuted && (
                   <span
                     className="absolute bottom-0 inset-x-0 py-5 bg-shadow-dark text-center cursor-pointer opacity-0 group-hover:opacity-100 transition duration-300"
@@ -76,7 +74,7 @@ function DetailHeader({ overview }) {
               </p>
             </div>
             {/* Content Tab */}
-            <div className="flex  justify-evenly py-5">
+            <div className="flex justify-evenly absolute bottom-0 inset-x-0">
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "text-active" : "text-white hover:text-active"

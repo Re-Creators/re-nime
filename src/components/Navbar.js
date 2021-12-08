@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   const prevScrollY = useRef(0);
-
   const [goingUp, setGoingUp] = useState(true);
   const props = useSpring({ opacity: goingUp ? 1 : 0, top: goingUp ? 0 : -20 });
 

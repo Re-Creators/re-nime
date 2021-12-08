@@ -6,11 +6,28 @@ import { store } from "./app/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { offsetLimitPagination } from "@apollo/client/utilities";
+const client = new ApolloClient({
+  uri: "https://graphql.anilist.co/",
+  cache: new InMemoryCache({
+    typePolicies: {
+      Page: {
+        fields: {
+          media: offsetLimitPagination(),
+        },
+      },
+    },
+  }),
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

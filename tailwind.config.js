@@ -21,6 +21,7 @@ module.exports = {
       },
       minWidth: {
         container: "320px",
+        tooltip: "290px",
       },
       maxHeight: {
         option: "500px",
@@ -44,6 +45,7 @@ module.exports = {
         detail: "215px auto",
         "detail-content": "208px auto",
         "detail-relation": "85px auto",
+        "top-anime": "130px 130px 150px",
       },
     },
   },
