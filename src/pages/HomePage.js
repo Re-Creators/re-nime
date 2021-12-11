@@ -33,6 +33,7 @@ function HomePage() {
       <LandingSection
         title="Upcoming next season"
         lists={data.nextSeason.media}
+        segment="next-season"
       />
       <LandingSection title="All Time Popular" lists={data.popular.media} />
       <div>

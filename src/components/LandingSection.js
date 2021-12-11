@@ -7,13 +7,13 @@ function LandingSection({ title, lists, segment }) {
     <div>
       <div className="flex justify-between">
         <Link
-          to={`/anime/search/${segment}`}
+          to={`/search/anime/${segment}`}
           className="uppercase text-lg font-semibold hover:text-active"
         >
           {title}
         </Link>
         <Link
-          to={`/anime/search/${segment}`}
+          to={`/search/anime/${segment}`}
           className="text-xs hover:text-active"
         >
           View All

@@ -9,13 +9,9 @@ import { useEffect } from "react";
 import { setTitle } from "../features/filter/filterSlice";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
-function TrendingPage() {
+function FilterResult({ variables }) {
   const { data, loading, error, fetchMore } = useQuery(FILTER_ANIME, {
-    variables: {
-      page: 1,
-      type: "ANIME",
-      sort: ["TRENDING_DESC", "POPULARITY_DESC"],
-    },
+    variables: variables,
   });
 
   const { setLastElement, animeData, incomingLoading } = useInfiniteScroll(
@@ -80,4 +76,4 @@ function TrendingPage() {
   );
 }
 
-export default TrendingPage;
+export default FilterResult;

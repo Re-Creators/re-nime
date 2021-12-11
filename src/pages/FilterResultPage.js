@@ -8,31 +8,31 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setTitle } from "../features/filter/filterSlice";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import { getFilterData } from "../utils";
 
-function TrendingPage() {
+function FilterResultPage({ filter }) {
+  const filterData = getFilterData(filter);
   const { data, loading, error, fetchMore } = useQuery(FILTER_ANIME, {
-    variables: {
-      page: 1,
-      type: "ANIME",
-      sort: ["TRENDING_DESC", "POPULARITY_DESC"],
-    },
+    variables: filterData.variable,
   });
 
-  const { setLastElement, animeData, incomingLoading } = useInfiniteScroll(
+  const { setLastElement, animeData } = useInfiniteScroll(
     (page) => fetchMore({ variables: { page: page } }),
     data
   );
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (!error) {
-      dispatch(setTitle("Trending Anime"));
+      dispatch(setTitle(filterData.title));
     }
 
     return () => {
       dispatch(setTitle(null));
     };
-  }, [error, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -80,4 +80,4 @@ function TrendingPage() {
   );
 }
 
-export default TrendingPage;
+export default FilterResultPage;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsTagsFill } from "react-icons/bs";
@@ -13,25 +13,81 @@ import {
 import FilterSelectedItem from "./filters/FilterSelectedItem";
 import { useSelector } from "react-redux";
 import { selectTitle } from "../features/filter/filterSlice";
+import {
+  useLocation,
+  useNavigate,
+  useSearchParams,
+  createSearchParams,
+} from "react-router-dom";
 
 function Filter() {
   const title = useSelector(selectTitle);
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const genres = genresList;
   const years = getYearsList();
   const seasons = seasonsList;
   const format = formatList;
   const [filterSelected, setFilterSelected] = useState({
-    search: "",
+    search: [],
     genres: [],
-    years: [],
-    seasons: [],
+    year: [],
+    season: [],
     format: [],
   });
 
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    if (location.pathname !== "/search/anime/") {
+      navigate({
+        pathname: "search/anime",
+        search: `?${createSearchParams(filterSelected)}`,
+      });
+      return;
+    }
+
+    setSearchParams(filterSelected);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterSelected]);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    if (location.pathname === "/") {
+      firstRender.current = true;
+      setFilterSelected({
+        search: [],
+        genres: [],
+        year: [],
+        season: [],
+        format: [],
+      });
+    }
+  }, [location]);
   function onFilterSelected(key, item) {
     setFilterSelected((oldVal) => {
       oldVal[key] = item;
+
+      return { ...oldVal };
+    });
+  }
+
+  function onRemoveSelected(key, item) {
+    setFilterSelected((oldVal) => {
+      let selectionAfterRemoval = oldVal[key].filter(
+        (current) => current !== item
+      );
+      oldVal[key] = selectionAfterRemoval;
 
       return { ...oldVal };
     });
@@ -47,7 +103,9 @@ function Filter() {
 
   return (
     <div className="mb-8">
-      {title && <h1 className="mb-10 text-3xl font-bold">Trending Anime</h1>}
+      {title && (
+        <h1 className="mb-10 text-3xl font-bold capitalize">{title}</h1>
+      )}
 
       <div className="grid grid-cols-filter-wrap items-center">
         <div className="grid grid-cols-filter gap-8 ">
@@ -61,7 +119,7 @@ function Filter() {
                 <IoIosClose
                   className="w-6 h-6 abs-center right-3 icon-input cursor-pointer"
                   onClick={() => {
-                    onFilterSelected("search", "");
+                    onFilterSelected("search", []);
                   }}
                 />
               )}
@@ -69,7 +127,12 @@ function Filter() {
               <input
                 type="text"
                 value={filterSelected.search}
-                onChange={(e) => onFilterSelected("search", e.target.value)}
+                onChange={(e) =>
+                  onFilterSelected(
+                    "search",
+                    e.target.value === "" ? [] : e.target.value
+                  )
+                }
                 className="w-full p-3 pl-9 rounded-lg outline-none text-xs"
                 style={{ backgroundColor: "#282F44" }}
               />
@@ -80,27 +143,31 @@ function Filter() {
             items={genres}
             title="genres"
             setSelected={onFilterSelected}
+            selectedItem={filterSelected.genres}
             multipleSelect
             searchAble
           />
           {/* Years */}
           <Dropdown
             items={years}
-            title="years"
+            title="year"
             setSelected={onFilterSelected}
+            selectedItem={filterSelected.year}
             searchAble
           />
           {/* Seasons */}
           <Dropdown
             items={seasons}
-            title="seasons"
+            title="season"
             setSelected={onFilterSelected}
+            selectedItem={filterSelected.season}
           />
           {/* Format */}
           <Dropdown
             items={format}
             title="format"
             setSelected={onFilterSelected}
+            selectedItem={filterSelected.format}
             multipleSelect
           />
         </div>
@@ -115,27 +182,43 @@ function Filter() {
         <div className="flex items-center text-sm gap-3">
           {isSelectedEmpty() && <BsTagsFill className="mr-5 text-lg" />}
           {/* Search */}
-          {filterSelected.search && (
+          {filterSelected.search.length > 0 && (
             <span className="py-1 px-3 bg-primary rounded-md cursor-pointer">
               Search : {filterSelected.search}
             </span>
           )}
           {/* Genre */}
           {filterSelected.genres.length > 0 && (
-            <FilterSelectedItem items={filterSelected.genres} />
+            <FilterSelectedItem
+              items={filterSelected.genres}
+              itemKey="genres"
+              onRemoveSelected={onRemoveSelected}
+            />
           )}
 
           {/* Seasons */}
-          {filterSelected.seasons.length > 0 && (
-            <FilterSelectedItem items={filterSelected.seasons} />
+          {filterSelected.season.length > 0 && (
+            <FilterSelectedItem
+              items={filterSelected.season}
+              itemKey="season"
+              onRemoveSelected={onRemoveSelected}
+            />
           )}
           {/* Format */}
           {filterSelected.format.length > 0 && (
-            <FilterSelectedItem items={filterSelected.format} />
+            <FilterSelectedItem
+              items={filterSelected.format}
+              itemKey="format"
+              onRemoveSelected={onRemoveSelected}
+            />
           )}
           {/* Years */}
-          {filterSelected.years.length > 0 && (
-            <FilterSelectedItem items={filterSelected.years} />
+          {filterSelected.year.length > 0 && (
+            <FilterSelectedItem
+              items={filterSelected.year}
+              itemKey="year"
+              onRemoveSelected={onRemoveSelected}
+            />
           )}
         </div>
       </div>

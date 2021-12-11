@@ -1,38 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { FILTER_ANIME } from "../graphql/querySchema";
-import { generateSlug } from "../utils";
+import { generateSlug, transformVariable } from "../utils";
 import CustomTippy from "../components/CustomTippy";
 import { getDate } from "../utils";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { setTitle } from "../features/filter/filterSlice";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
-function TrendingPage() {
+function SearchAnime() {
+  const [searchParams] = useSearchParams();
+  const variables = useMemo(() => {
+    let initVariable = { page: 1, type: "ANIME" };
+
+    searchParams.forEach((value, key) => {
+      if (key === "genres" || key === "format") {
+        const tranformed = transformVariable(key, searchParams.getAll(key));
+        initVariable[key] = tranformed;
+      } else if (key === "year") {
+        initVariable[key] = parseInt(value);
+      } else if (key === "season") {
+        initVariable[key] = value.toUpperCase();
+      } else {
+        initVariable[key] = value;
+      }
+    });
+    return initVariable;
+  }, [searchParams]);
   const { data, loading, error, fetchMore } = useQuery(FILTER_ANIME, {
-    variables: {
-      page: 1,
-      type: "ANIME",
-      sort: ["TRENDING_DESC", "POPULARITY_DESC"],
-    },
+    variables: variables,
   });
 
-  const { setLastElement, animeData, incomingLoading } = useInfiniteScroll(
+  const { setLastElement, animeData } = useInfiniteScroll(
     (page) => fetchMore({ variables: { page: page } }),
     data
   );
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (!error) {
-      dispatch(setTitle("Trending Anime"));
-    }
-
-    return () => {
-      dispatch(setTitle(null));
-    };
-  }, [error, dispatch]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -80,4 +83,4 @@ function TrendingPage() {
   );
 }
 
-export default TrendingPage;
+export default SearchAnime;

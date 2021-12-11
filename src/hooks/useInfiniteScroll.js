@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 export default function useInfiniteScroll(fetchData, initialData) {
   const [lastElement, setLastElement] = useState(null);
@@ -9,8 +9,7 @@ export default function useInfiniteScroll(fetchData, initialData) {
   const waitObserve = useRef(false);
   const hasNextPage = useRef(true);
 
-  const fetchingMoreData = async () => {
-    console.log("Fetcing...");
+  const fetchingMoreData = useCallback(async () => {
     setIncomingLoading(true);
     pageNum.current++;
     const { data } = await fetchData(pageNum.current);
@@ -24,7 +23,8 @@ export default function useInfiniteScroll(fetchData, initialData) {
 
     setAnimeData(data.Page);
     setIncomingLoading(false);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [animeData]);
 
   const observer = useRef();
 
@@ -33,7 +33,6 @@ export default function useInfiniteScroll(fetchData, initialData) {
   }, [incomingLoading]);
 
   useEffect(() => {
-    console.log("Initial");
     if (initialData) {
       setAnimeData(initialData.Page);
     }

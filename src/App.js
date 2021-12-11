@@ -10,7 +10,9 @@ import DetailCharacter from "./components/detail/DetailCharacter";
 import HomePage from "./pages/HomePage";
 import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
-import TrendingPage from "./pages/TrendingPage";
+import FilterResultPage from "./pages/FilterResultPage";
+import BaseSearchPage from "./pages/BaseSearchPage";
+
 function App() {
   return (
     <div className="App ">
@@ -18,9 +20,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="anime/search">
-            <Route index element={<HomePage />} />
-            <Route path="trending" element={<TrendingPage />} />
+          <Route path="search/anime">
+            <Route index element={<BaseSearchPage />} />
+            <Route
+              path="trending"
+              element={<FilterResultPage filter="trending" />}
+            />
+            <Route
+              path="this-season"
+              element={<FilterResultPage filter="this-season" />}
+            />
+            <Route
+              path="next-season"
+              element={<FilterResultPage filter="next-season" />}
+            />
           </Route>
         </Route>
         <Route path="anime/:id/:name" element={<DetailPage />}>

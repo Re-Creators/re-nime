@@ -9,10 +9,10 @@ function Dropdown({
   multipleSelect = false,
   searchAble = false,
   setSelected,
+  selectedItem,
 }) {
   const [localItems, setLocalItems] = useState(items);
   const [showOption, setShowOption] = useState(false);
-  const [selection, setSelection] = useState([]);
   const [inputFocus, setInputFocus] = useState(false);
 
   let domNode = useClickOutside(() => {
@@ -33,25 +33,22 @@ function Dropdown({
   }
 
   function handleOnClick(item) {
-    if (!selection.includes(item)) {
+    if (!selectedItem.includes(item)) {
       if (!multipleSelect) {
         setSelected(title, [item]);
-        setSelection([item]);
       } else {
-        setSelected(title, [...selection, item]);
-        setSelection([...selection, item]);
+        setSelected(title, [...selectedItem, item]);
       }
     } else {
-      let selectionAfterRemoval = selection.filter(
+      let selectionAfterRemoval = selectedItem.filter(
         (current) => current !== item
       );
       setSelected(title, selectionAfterRemoval);
-      setSelection(selectionAfterRemoval);
     }
   }
 
   function isItemInSelection(item) {
-    if (selection.includes(item)) {
+    if (selectedItem.includes(item)) {
       return true;
     }
     return false;
@@ -62,11 +59,10 @@ function Dropdown({
       <div className="capitalize">{title}</div>
       {/* Input */}
       <div className="relative mt-3">
-        {selection.length > 0 ? (
+        {selectedItem.length > 0 ? (
           <IoIosClose
             className="w-6 h-6 abs-center right-3 icon-input cursor-pointer"
             onClick={() => {
-              setSelection([]);
               setSelected(title, []);
             }}
           />
@@ -74,17 +70,17 @@ function Dropdown({
           <IoIosArrowDown className="w-4 h-4 abs-center right-3 icon-input cursor-pointer" />
         )}
 
-        {!inputFocus && selection.length > 0 && (
+        {!inputFocus && selectedItem.length > 0 && (
           <div className="abs-center text-xs ml-2">
             <span
               className="py-1 px-2 bg-gray-600 rounded-md cursor-pointer mr-1"
-              onClick={() => handleOnClick(selection[0])}
+              onClick={() => handleOnClick(selectedItem[0])}
             >
-              {selection[0]}
+              {selectedItem[0]}
             </span>
-            {selection.length > 1 && (
+            {selectedItem.length > 1 && (
               <span className="py-1 px-2 bg-gray-600 rounded-md cursor-pointer">
-                +{selection.length}
+                +{selectedItem.length}
               </span>
             )}
           </div>
