@@ -9,6 +9,9 @@ module.exports = {
         "shadow-dark":
           "linear-gradient(0deg,rgb(40, 47, 68) 30%,rgba(40, 47, 65, .45))",
       },
+      backgroundColor: {
+        overlay: "rgba(31,38,49, .8)",
+      },
       colors: {
         primary: "#282F44",
         secondary: "#191d32",
@@ -25,9 +28,12 @@ module.exports = {
       },
       maxHeight: {
         option: "500px",
+        "preview-card": "115px",
       },
       width: {
         tooltip: "290px",
+        "small-card": "85px",
+        "preview-relation": "240px",
       },
       margin: {
         main: "68px",
@@ -37,6 +43,7 @@ module.exports = {
         "detail-cover": "400px",
         "card-result": "256px",
         "detail-card": "80px",
+        "preview-card": "115px",
       },
       gridTemplateColumns: {
         "filter-wrap": "auto 42px",
