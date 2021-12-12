@@ -14,6 +14,14 @@ function capitalFirstWord(str) {
   return str.at(0).toUpperCase() + lowerCaseStr.slice(1);
 }
 
+export function truncateString(str, num) {
+  if (str?.length > num) {
+    return str.slice(0, num) + "...";
+  } else {
+    return str;
+  }
+}
+
 export function getDate(status, nextAiringEpisode, startDate, endDate, season) {
   if (startDate.year === null) return null;
 

@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import parse from "html-react-parser";
 import { BsChevronDown, BsFillHeartFill } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 
 const MAX_OVERVIEW_WORD = 1236;
 
-function DetailHeader({ overview, bannerImg, coverImg, title }) {
+function DetailHeader({
+  overview,
+  bannerImg,
+  coverImg,
+  title,
+  isHaveStreaming,
+}) {
   const [isTrancuted, setIsTruncated] = useState(null);
-
+  const { id, name } = useParams();
+  const location = useLocation();
+  const pathnameRef = useRef(`/anime/${id}/${name}`);
   useEffect(() => {
     setIsTruncated(overview.length > MAX_OVERVIEW_WORD);
   }, [overview]);
@@ -75,27 +83,32 @@ function DetailHeader({ overview, bannerImg, coverImg, title }) {
             </div>
             {/* Content Tab */}
             <div className="flex justify-evenly absolute bottom-0 inset-x-0">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-active" : "text-white hover:text-active"
+              <Link
+                className={
+                  location.pathname === pathnameRef.current
+                    ? "text-active"
+                    : "text-white hover:text-active"
                 }
-                to="/anime/288232/komi"
+                to={pathnameRef.current}
               >
                 Overview
-              </NavLink>
+              </Link>
+              {isHaveStreaming && (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-active" : "text-white hover:text-active"
+                  }
+                  to={`${pathnameRef.current}/watch`}
+                >
+                  Watch
+                </NavLink>
+              )}
+
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "text-active" : "text-white hover:text-active"
                 }
-                to="/anime/7290/komi-san/watch"
-              >
-                Watch
-              </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-active" : "text-white hover:text-active"
-                }
-                to="/anime/7290/komi-san/character"
+                to={`${pathnameRef.current}/characters`}
               >
                 Character
               </NavLink>
@@ -103,7 +116,7 @@ function DetailHeader({ overview, bannerImg, coverImg, title }) {
                 className={({ isActive }) =>
                   isActive ? "text-active" : "text-white hover:text-active"
                 }
-                to="/anime/7290/komi-san/staff"
+                to={`${pathnameRef.current}/staff`}
               >
                 Staff
               </NavLink>
@@ -111,7 +124,7 @@ function DetailHeader({ overview, bannerImg, coverImg, title }) {
                 className={({ isActive }) =>
                   isActive ? "text-active" : "text-white hover:text-active"
                 }
-                to="/anime/7290/komi-san/stats"
+                to={`${pathnameRef.current}/stats`}
               >
                 Stats
               </NavLink>
@@ -119,7 +132,7 @@ function DetailHeader({ overview, bannerImg, coverImg, title }) {
                 className={({ isActive }) =>
                   isActive ? "text-active" : "text-white hover:text-active"
                 }
-                to="/anime/7290/komi-san/social"
+                to={`${pathnameRef.current}/social`}
               >
                 Social
               </NavLink>

@@ -14,18 +14,31 @@ function DetailOverview({ tes }) {
       {data.relations.edges.length > 0 && (
         <div className="mb-3">
           <h1>Relations</h1>
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            {data.relations.edges.map((relation) => (
-              // <RelationCard
-              //   key={relation.id}
-              //   type={relation.node.type}
-              //   relationType={relation.relationType}
-              //   status={relation.node.status}
-              //   title={relation.node.title.userPreferred}
-              // />
-              <RelationCardSmall key={relation.id} />
-            ))}
-          </div>
+          {data.relations.edges.length > 4 ? (
+            <div className="flex  flex-wrap gap-5">
+              {data.relations.edges.map((relation) => (
+                <RelationCardSmall
+                  key={relation.id}
+                  type={relation.node.type}
+                  relationType={relation.relationType}
+                  status={relation.node.status}
+                  title={relation.node.title.userPreferred}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              {data.relations.edges.map((relation) => (
+                <RelationCard
+                  key={relation.id}
+                  type={relation.node.type}
+                  relationType={relation.relationType}
+                  status={relation.node.status}
+                  title={relation.node.title.userPreferred}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
 

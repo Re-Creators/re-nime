@@ -15,6 +15,27 @@ function DetailPage() {
     },
   });
 
+  const sortRangking = (rangking) => {
+    const sorted = rangking.filter((rank) => rank.allTime);
+    if (sorted.length >= 2) {
+      return sorted;
+    }
+    return rangking.slice(0, 2);
+  };
+
+  const convertSecond = (seconds) => {
+    if (seconds) {
+      const [hours, minute] = new Date(seconds * 1000)
+        .toISOString()
+        .slice(11, 16)
+        .split(":");
+      const convertedDay = Math.floor(seconds / 86400);
+
+      return `${convertedDay}d ${hours}h ${minute}m`;
+    }
+    return "Unknown";
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
@@ -25,27 +46,146 @@ function DetailPage() {
         title={data.Media.title.userPreferred}
         bannerImg={data.Media.bannerImage}
         coverImg={data.Media.coverImage.large}
+        isHaveStreaming={data.Media.streamingEpisodes.length > 0}
       />
       <div className="mt-5 max-w-container mx-auto grid grid-cols-detail-content gap-10">
         <div className="text-white">
-          <div className="text-xs font-semibold">
-            <p className="flex items-center px-2 py-3 bg-primary capitalize rounded-md mb-5">
-              <AiFillStar className="text-yellow-500 mr-3 w-4 h-4" />
-              #6 Highest rated all the time
-            </p>
-            <p className="flex items-center px-2 py-3 bg-primary capitalize rounded-md">
-              <AiFillHeart className="text-red-400 mr-3 w-4 h-4" />
-              #296 most popular all time
-            </p>
-          </div>
-          <div className="mt-5 bg-primary rounded-md px-3 py-3">
+          {data.Media.rankings.length > 0 && (
+            <div className="text-xs font-semibold">
+              {sortRangking(data.Media.rankings).map((ranking) => (
+                <p
+                  className="flex items-center px-2 py-3 bg-primary capitalize rounded-md mb-5"
+                  key={ranking.id}
+                >
+                  {ranking.type === "RATED" ? (
+                    <AiFillStar className="text-yellow-500 mr-3 w-4 h-4" />
+                  ) : (
+                    <AiFillHeart className="text-red-500 mr-3 w-4 h-4" />
+                  )}
+                  #{ranking.rank} {ranking.context}
+                </p>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-5 bg-primary rounded-md px-3 py-3 text-sm">
+            {data.Media.nextAiringEpisode && (
+              <div className="mb-3 text-active font-semibold">
+                <div className="">Airing</div>
+                <div className="text-xs mt-1">
+                  Ep {data.Media.nextAiringEpisode.episode}:{" "}
+                  {convertSecond(data.Media.nextAiringEpisode.timeUntilAiring)}
+                </div>
+              </div>
+            )}
+
             <div className="mb-3">
               <div className="font-semibold">Format</div>
-              <div className="text-sm">TV</div>
+              <div className="text-sm">{data.Media.format}</div>
             </div>
             <div className="mb-3">
               <div className="font-semibold">Episodes</div>
+              <div className="text-sm">{data.Media.episodes}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Episodes Duration</div>
+              <div className="text-sm">{data.Media.duration} Mins</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Status</div>
+              <div className="text-sm capitalize">{data.Media.status}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Start Date</div>
               <div className="text-sm">22</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">End Date</div>
+              <div className="text-sm">22</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Season</div>
+              <div className="text-sm capitalize">
+                {data.Media.season} {data.Media.seasonYear}
+              </div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Average Score</div>
+              <div className="text-sm">{data.Media.averageScore}%</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Mean Score</div>
+              <div className="text-sm">{data.Media.meanScore}%</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Popularity</div>
+              <div className="text-sm">{data.Media.popularity}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Favorites</div>
+              <div className="text-sm">{data.Media.favourites}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Studios</div>
+              <ul>
+                {data.Media.studios.edges
+                  .filter((studio) => studio.isMain)
+                  .map((studio) => (
+                    <li key={studio.node.id} className="text-sm">
+                      {studio.node.name}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Producers</div>
+              <ul>
+                {data.Media.studios.edges
+                  .filter((studio) => !studio.isMain)
+                  .map((studio) => (
+                    <li key={studio.node.id} className="text-sm">
+                      {studio.node.name}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Sources</div>
+              <div className="text-sm">{data.Media.source}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Hashtag</div>
+              <div className="text-sm">{data.Media.hashtag}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Genres</div>
+              <ul>
+                {data.Media.genres.map((genre, index) => (
+                  <li className="text-sm" key={index}>
+                    {genre}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Romaji</div>
+              <div className="text-sm">{data.Media.title.romaji}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">English</div>
+              <div className="text-sm">{data.Media.title.english}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Native</div>
+              <div className="text-sm">{data.Media.title.native}</div>
+            </div>
+            <div className="mb-3">
+              <div className="font-semibold">Synonyms</div>
+              <ul className="text-sm">
+                {data.Media.synonyms.map((synonym) => (
+                  <li>{synonym}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

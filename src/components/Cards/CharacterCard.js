@@ -13,7 +13,9 @@ function CharacterCard({ charImg, charName, charRole, vaImg, vaName, vaLang }) {
           >
             {charName}
           </Link>
-          <div className="mt-auto text-xs text-gray-400">{charRole}</div>
+          <div className="mt-auto text-xs text-gray-400 capitalize">
+            {charRole}
+          </div>
         </div>
       </div>
       {/* Voice Actor */}

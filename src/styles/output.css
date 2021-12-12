@@ -608,6 +608,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: -7rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .inline {
   display: inline;
 }
@@ -692,12 +696,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2.25rem;
 }
 
+.h-\[100px\] {
+  height: 100px;
+}
+
 .max-h-option {
   max-height: 500px;
 }
 
 .max-h-preview-card {
   max-height: 115px;
+}
+
+.max-h-\[50\%\] {
+  max-height: 50%;
 }
 
 .w-tooltip {
@@ -764,6 +776,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 900px;
 }
 
+.max-w-\[50\%\] {
+  max-width: 50%;
+}
+
 .transform {
   transform: var(--tw-transform);
 }
@@ -802,6 +818,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid-cols-detail {
   grid-template-columns: 215px auto;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-\[100px\] {
+  grid-template-rows: 100px;
+}
+
+.grid-rows-\[repeat\(auto-fill\2c _100px\)\] {
+  grid-template-rows: repeat(auto-fill, 100px);
 }
 
 .flex-row-reverse {
@@ -862,6 +890,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .rounded-md {
@@ -1000,6 +1036,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 1.25rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .pr-9 {
   padding-right: 2.25rem;
 }
@@ -1122,6 +1163,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(40 47 68 / var(--tw-text-opacity));
 }
 
 .opacity-0 {

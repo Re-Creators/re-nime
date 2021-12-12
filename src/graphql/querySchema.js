@@ -403,3 +403,78 @@ export const FILTER_ANIME = gql`
     }
   }
 `;
+
+export const CHARACTER_LIST = gql`
+  query media($id: Int, $page: Int) {
+    Media(id: $id) {
+      id
+      characters(page: $page, sort: [ROLE, RELEVANCE, ID]) {
+        pageInfo {
+          total
+          perPage
+          currentPage
+          lastPage
+          hasNextPage
+        }
+        edges {
+          id
+          role
+          name
+          voiceActorRoles(sort: [RELEVANCE, ID], language: JAPANESE) {
+            roleNotes
+            dubGroup
+            voiceActor {
+              id
+              name {
+                userPreferred
+              }
+              language: languageV2
+              image {
+                large
+              }
+            }
+          }
+          node {
+            id
+            name {
+              userPreferred
+            }
+            image {
+              large
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const STAFF_LIST = gql`
+  query media($id: Int, $page: Int) {
+    Media(id: $id) {
+      id
+      staff(page: $page, sort: [RELEVANCE, ID]) {
+        pageInfo {
+          total
+          perPage
+          currentPage
+          lastPage
+          hasNextPage
+        }
+        edges {
+          id
+          role
+          node {
+            id
+            name {
+              userPreferred
+            }
+            image {
+              large
+            }
+          }
+        }
+      }
+    }
+  }
+`;

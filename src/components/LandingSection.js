@@ -1,7 +1,7 @@
 import CustomTippy from "./CustomTippy";
 import { Link } from "react-router-dom";
 import { getDate, generateSlug } from "../utils/index";
-
+import { truncateString } from "../utils/index";
 function LandingSection({ title, lists, segment }) {
   return (
     <div>
@@ -48,8 +48,8 @@ function LandingSection({ title, lists, segment }) {
                       className="w-full h-full object-cover rounded-md"
                     />
                   </div>
-                  <div className="mt-2 group-hover:text-active">
-                    {list.title.userPreferred}
+                  <div className="mt-2 group-hover:text-active text-sm">
+                    {truncateString(list.title.userPreferred, 60)}
                   </div>
                 </Link>
               </div>

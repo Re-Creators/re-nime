@@ -39,7 +39,7 @@ function App() {
         <Route path="anime/:id/:name" element={<DetailPage />}>
           <Route index element={<DetailOverview />} />
           <Route path="watch" element={<DetailWatch />} />
-          <Route path="character" element={<DetailCharacter />} />
+          <Route path="characters" element={<DetailCharacter />} />
           <Route path="staff" element={<DetailStaff />} />
           <Route path="stats" element={<DetailStats />} />
           <Route path="social" element={<DetailSocial />} />
