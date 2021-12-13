@@ -4,7 +4,11 @@ function StaffCard({ img, name, role }) {
   return (
     <div className="bg-primary flex h-detail-card">
       <div className="w-1/2 flex gap-2">
-        <img src={img} alt="" className="h-full bg-cover w-16" />
+        <img
+          src={img}
+          alt=""
+          className="h-full object-cover object-center w-16"
+        />
         <div className="h-full flex flex-col py-2">
           <Link
             to="/anime/8343/monogatari"

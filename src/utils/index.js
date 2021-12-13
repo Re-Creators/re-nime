@@ -86,6 +86,16 @@ export function getFilterData(state) {
         season: nextSeason,
       },
     };
+  } else if (state === "popular") {
+    return {
+      title: "All-Time Popular Anime",
+      variable: { page: 1, type: "ANIME", sort: "POPULARITY_DESC" },
+    };
+  } else if (state === "top-100") {
+    return {
+      title: "Top 100 Anime",
+      variable: { page: 1, type: "ANIME", sort: "SCORE_DESC" },
+    };
   }
 }
 
@@ -105,4 +115,23 @@ export function transformVariable(key, arr) {
   }
 
   return arr;
+}
+
+export function getMonthName(monthNum) {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  return months[monthNum - 1];
 }

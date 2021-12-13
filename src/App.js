@@ -5,13 +5,13 @@ import DetailOverview from "./components/detail/DetailOverview";
 import DetailWatch from "./components/detail/DetailWatch";
 import DetailStaff from "./components/detail/DetailStaff";
 import DetailStats from "./components/detail/DetailStats";
-import DetailSocial from "./components/detail/DetailSocial";
 import DetailCharacter from "./components/detail/DetailCharacter";
 import HomePage from "./pages/HomePage";
 import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
 import FilterResultPage from "./pages/FilterResultPage";
 import BaseSearchPage from "./pages/BaseSearchPage";
+import CharacterPage from "./pages/CharacterPage";
 
 function App() {
   return (
@@ -34,6 +34,14 @@ function App() {
               path="next-season"
               element={<FilterResultPage filter="next-season" />}
             />
+            <Route
+              path="popular"
+              element={<FilterResultPage filter="popular" />}
+            />
+            <Route
+              path="top-100"
+              element={<FilterResultPage filter="top-100" isRanked />}
+            />
           </Route>
         </Route>
         <Route path="anime/:id/:name" element={<DetailPage />}>
@@ -42,8 +50,8 @@ function App() {
           <Route path="characters" element={<DetailCharacter />} />
           <Route path="staff" element={<DetailStaff />} />
           <Route path="stats" element={<DetailStats />} />
-          <Route path="social" element={<DetailSocial />} />
         </Route>
+        <Route path="/character/:id/:name" element={<CharacterPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

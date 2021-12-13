@@ -4,9 +4,7 @@ import { FILTER_ANIME } from "../graphql/querySchema";
 import { generateSlug, transformVariable } from "../utils";
 import CustomTippy from "../components/CustomTippy";
 import { getDate } from "../utils";
-import { useDispatch } from "react-redux";
-import { useEffect, useMemo } from "react";
-import { setTitle } from "../features/filter/filterSlice";
+import { useMemo } from "react";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
 function SearchAnime() {

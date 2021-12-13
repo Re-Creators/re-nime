@@ -182,8 +182,8 @@ function DetailPage() {
             <div className="mb-3">
               <div className="font-semibold">Synonyms</div>
               <ul className="text-sm">
-                {data.Media.synonyms.map((synonym) => (
-                  <li>{synonym}</li>
+                {data.Media.synonyms.map((synonym, index) => (
+                  <li key={index}>{synonym}</li>
                 ))}
               </ul>
             </div>

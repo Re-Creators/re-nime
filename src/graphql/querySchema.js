@@ -478,3 +478,129 @@ export const STAFF_LIST = gql`
     }
   }
 `;
+
+export const STATS_INFO = gql`
+  query ($id: Int) {
+    Media(id: $id) {
+      id
+      rankings {
+        id
+        rank
+        type
+        format
+        year
+        season
+        allTime
+        context
+      }
+      trends(sort: ID_DESC) {
+        nodes {
+          averageScore
+          date
+          trending
+          popularity
+        }
+      }
+      airingTrends: trends(releasing: true, sort: EPISODE_DESC) {
+        nodes {
+          averageScore
+          inProgress
+          episode
+        }
+      }
+      distribution: stats {
+        status: statusDistribution {
+          status
+          amount
+        }
+        score: scoreDistribution {
+          score
+          amount
+        }
+      }
+    }
+  }
+`;
+
+export const CHARACTER_INFO = gql`
+  query (
+    $id: Int
+    $page: Int
+    $sort: [MediaSort]
+    $onList: Boolean
+    $withRoles: Boolean = false
+  ) {
+    Character(id: $id) {
+      id
+      name {
+        first
+        middle
+        last
+        full
+        native
+        userPreferred
+        alternative
+        alternativeSpoiler
+      }
+      image {
+        large
+      }
+      favourites
+      isFavourite
+      description
+      age
+      gender
+      bloodType
+      dateOfBirth {
+        year
+        month
+        day
+      }
+      media(page: $page, sort: $sort, onList: $onList)
+        @include(if: $withRoles) {
+        pageInfo {
+          total
+          perPage
+          currentPage
+          lastPage
+          hasNextPage
+        }
+        edges {
+          id
+          characterRole
+          voiceActorRoles(sort: [RELEVANCE, ID], language: JAPANESE) {
+            roleNotes
+            voiceActor {
+              id
+              name {
+                userPreferred
+              }
+              image {
+                large
+              }
+              language: languageV2
+            }
+          }
+          node {
+            id
+            type
+            bannerImage
+            title {
+              userPreferred
+            }
+            coverImage {
+              large
+            }
+            startDate {
+              year
+            }
+            mediaListEntry {
+              id
+              status
+            }
+          }
+        }
+      }
+    }
+  }
+`;

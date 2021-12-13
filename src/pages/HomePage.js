@@ -35,19 +35,23 @@ function HomePage() {
         lists={data.nextSeason.media}
         segment="next-season"
       />
-      <LandingSection title="All Time Popular" lists={data.popular.media} />
+      <LandingSection
+        title="All Time Popular"
+        segment="popular"
+        lists={data.popular.media}
+      />
       <div>
         <div className="flex justify-between">
           <Link to="/" className="font-semibold">
             TOP 100 ANIME
           </Link>
-          <Link to="/" className="text-xs">
+          <Link to="/search/anime/top-100" className="text-xs">
             View All
           </Link>
         </div>
         <div className="mt-3">
           {data.top.media.map((list, index) => (
-            <div className="flex items-center h-24 mt-5">
+            <div className="flex items-center h-24 mt-5" key={list.id}>
               <div className="flex items-center justify-center p-4 h-14 mr-4 w-14 text-2xl text-active font-extrabold ">
                 <span className="pt-1 text-xl">#</span>
                 {index + 1}

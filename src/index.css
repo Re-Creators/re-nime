@@ -46,6 +46,10 @@ body {
   left: -4px;
 }
 
+.markdown a {
+  color: rgb(61, 180, 242);
+}
+
 /* Custom Scrollbar */
 
 /* 

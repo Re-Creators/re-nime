@@ -50,6 +50,7 @@ function DetailOverview({ tes }) {
             {data.characterPreview.edges.map((char) => (
               <CharacterCard
                 key={char.id}
+                id={char.node.id}
                 charImg={char.node.image.large}
                 charName={char.node.name.userPreferred}
                 charRole={char.role}

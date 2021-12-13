@@ -40,7 +40,7 @@ module.exports = {
       height: {
         navbar: "68px",
         "detail-cover": "400px",
-        "card-result": "256px",
+        "card-result": "265px",
         "detail-card": "80px",
         "preview-card": "115px",
       },

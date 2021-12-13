@@ -13,6 +13,7 @@ function DetailWatch() {
           style={{
             backgroundImage: `url('${streaming.thumbnail}')`,
           }}
+          rel="noreferrer"
         >
           <div className="bg-overlay absolute bottom-0 inset-x-0 p-2 overflow-hidden text-white text-sm whitespace-nowrap text-ellipsis">
             {streaming.title}

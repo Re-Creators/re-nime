@@ -10,7 +10,7 @@ import { setTitle } from "../features/filter/filterSlice";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import { getFilterData } from "../utils";
 
-function FilterResultPage({ filter }) {
+function FilterResultPage({ filter, isRanked }) {
   const filterData = getFilterData(filter);
   const { data, loading, error, fetchMore } = useQuery(FILTER_ANIME, {
     variables: filterData.variable,
@@ -53,9 +53,15 @@ function FilterResultPage({ filter }) {
             )}
           >
             <div
-              className="group cursor-pointer"
+              className="group cursor-pointer relative"
               ref={animeData.media.length - 1 === index && setLastElement}
             >
+              {isRanked && index < 100 && (
+                <div className="absolute z-20 -top-2 -left-2 w-[38px] h-[38px] bg-red-600 rounded-full  p-2 font-bold flex justify-center items-center text-sm ">
+                  #{index + 1}
+                </div>
+              )}
+
               <Link
                 to={`/anime/${list.id}/${generateSlug(
                   list.title.userPreferred

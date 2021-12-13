@@ -128,14 +128,6 @@ function DetailHeader({
               >
                 Stats
               </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-active" : "text-white hover:text-active"
-                }
-                to={`${pathnameRef.current}/social`}
-              >
-                Social
-              </NavLink>
             </div>
           </div>
         </div>
