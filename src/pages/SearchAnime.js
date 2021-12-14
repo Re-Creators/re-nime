@@ -26,6 +26,7 @@ function SearchAnime() {
     });
     return initVariable;
   }, [searchParams]);
+
   const { data, loading, error, fetchMore } = useQuery(FILTER_ANIME, {
     variables: variables,
   });
@@ -37,8 +38,10 @@ function SearchAnime() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
+  if (data.Page.media.length <= 0)
+    return <div className="text-white text-center text-3xl">No Result</div>;
   return (
-    <div className="grid grid-cols-results justify-between mt-5 gap-5">
+    <div className="grid-container mt-5 gap-5 px-2">
       {animeData &&
         animeData.media.map((list, index) => (
           <CustomTippy
@@ -63,14 +66,14 @@ function SearchAnime() {
                 )}`}
                 className=" relative"
               >
-                <div className="mb-3 w-full h-card-result overflow-hidden">
+                <div className="mb-3 w-full card-height overflow-hidden">
                   <img
                     src={list.coverImage.large}
                     alt=""
                     className="w-full h-full object-cover rounded-md"
                   />
                 </div>
-                <div className="mt-2 group-hover:text-active">
+                <div className="card-text mt-2 group-hover:text-active">
                   {list.title.userPreferred}
                 </div>
               </Link>

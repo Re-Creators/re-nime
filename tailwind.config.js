@@ -47,16 +47,22 @@ module.exports = {
       gridTemplateColumns: {
         "filter-wrap": "auto 42px",
         filter: "repeat(5, 170px)",
-        results: "repeat(auto-fill, 185px)",
+        results: "repeat(auto-fill,minmax(100px,1fr))",
+        "results-sm": "repeat(auto-fill,minmax(105px,1fr))",
+        "results-md": "repeat(auto-fill,minmax(125px,1fr))",
+        "results-lg": "repeat(auto-fill, 185px)",
         detail: "215px auto",
         "detail-content": "208px auto",
         "detail-relation": "85px auto",
         "top-anime": "130px 130px 150px",
+      },
+      gridTemplateRows: {
+        "min-content": "min-content auto",
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

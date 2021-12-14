@@ -6,10 +6,27 @@
   .abs-center {
     @apply absolute top-1/2 transform -translate-y-1/2;
   }
+
+  .card-height {
+    @apply w-full h-[157px] sm:h-[172px] lg:h-card-result;
+  }
+
+  .card-text {
+    @apply text-xs line-clamp-2 lg:text-base;
+  }
+
+  .grid-container {
+    @apply grid grid-cols-results sm:grid-cols-results-sm md:grid-cols-results-md lg:grid-cols-results-lg justify-between;
+  }
 }
 
 body {
   background-color: #191d32;
+}
+
+.App,
+#root {
+  width: 100%;
 }
 
 #arrow,

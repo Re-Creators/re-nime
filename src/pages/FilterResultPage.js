@@ -37,7 +37,7 @@ function FilterResultPage({ filter, isRanked }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
-    <div className="grid grid-cols-results justify-between mt-5 gap-5">
+    <div className="grid grid-cols-results sm:grid-cols-results-sm md:grid-cols-results-md lg:grid-cols-results-lg justify-between mt-5 gap-3 md:gap-5 px-3">
       {animeData &&
         animeData.media.map((list, index) => (
           <CustomTippy
@@ -68,14 +68,14 @@ function FilterResultPage({ filter, isRanked }) {
                 )}`}
                 className=" relative"
               >
-                <div className="mb-3 w-full h-card-result overflow-hidden">
+                <div className="card-height mb-3 overflow-hidden">
                   <img
                     src={list.coverImage.large}
                     alt=""
                     className="w-full h-full object-cover rounded-md"
                   />
                 </div>
-                <div className="mt-2 group-hover:text-active">
+                <div className="mt-2 group-hover:text-active text-xs md:text-base line-clamp-2">
                   {list.title.userPreferred}
                 </div>
               </Link>

@@ -1,14 +1,14 @@
 import CustomTippy from "./CustomTippy";
 import { Link } from "react-router-dom";
 import { getDate, generateSlug } from "../utils/index";
-import { truncateString } from "../utils/index";
+
 function LandingSection({ title, lists, segment }) {
   return (
-    <div>
+    <div className="">
       <div className="flex justify-between">
         <Link
           to={`/search/anime/${segment}`}
-          className="uppercase text-lg font-semibold hover:text-active"
+          className="uppercase xl:text-lg font-semibold hover:text-active"
         >
           {title}
         </Link>
@@ -20,8 +20,8 @@ function LandingSection({ title, lists, segment }) {
         </Link>
       </div>
       {lists && (
-        <div className="grid grid-cols-results justify-between mt-5 gap-5">
-          {lists.slice(1).map((list) => (
+        <div className="grid-container mt-5 gap-3 lg:gap-8  ">
+          {lists.map((list, index) => (
             <CustomTippy
               key={list.id}
               genres={list.genres.slice(0, 3)}
@@ -34,22 +34,26 @@ function LandingSection({ title, lists, segment }) {
                 list.season
               )}
             >
-              <div className="group cursor-pointer">
+              <div className="group cursor-pointer w-full grid grid-rows-min-content relative md:last:hidden">
                 <Link
                   to={`/anime/${list.id}/${generateSlug(
                     list.title.userPreferred
                   )}`}
-                  className=" relative"
+                  className="card-height w-full relative"
                 >
-                  <div className="mb-3 w-full h-card-result overflow-hidden">
-                    <img
-                      src={list.coverImage.large}
-                      alt=""
-                      className="w-full h-full object-cover rounded-md"
-                    />
-                  </div>
-                  <div className="mt-2 group-hover:text-active text-sm">
-                    {truncateString(list.title.userPreferred, 60)}
+                  <img
+                    src={list.coverImage.large}
+                    alt=""
+                    className="absolute top-0 left-0 w-full h-full object-cover object-center rounded-md"
+                  />
+                </Link>
+                <Link
+                  to={`/anime/${list.id}/${generateSlug(
+                    list.title.userPreferred
+                  )}`}
+                >
+                  <div className="card-text mt-2 group-hover:text-active ">
+                    {list.title.userPreferred}
                   </div>
                 </Link>
               </div>

@@ -1,4 +1,4 @@
-export const genresList = [
+const genresList = [
   "Action",
   "Adventure",
   "Comedy",
@@ -20,9 +20,9 @@ export const genresList = [
   "Thriller",
 ];
 
-export const seasonsList = ["Summer", "Spring", "Winter", "Fall"];
+const seasonsList = ["Summer", "Spring", "Winter", "Fall"];
 
-export const formatList = [
+const formatList = [
   "TV Show",
   "OVA",
   "TV Short",
@@ -32,7 +32,7 @@ export const formatList = [
   "Special",
 ];
 
-export const getYearsList = () => {
+const getYearsList = () => {
   const currentYear = new Date().getFullYear();
   const years = [];
   for (let year = currentYear + 1; year >= 1940; year--) {
@@ -40,3 +40,12 @@ export const getYearsList = () => {
   }
   return years;
 };
+
+const filterData = {
+  genres: genresList,
+  seasons: seasonsList,
+  format: formatList,
+  years: getYearsList(),
+};
+
+export default filterData;

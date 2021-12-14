@@ -3,7 +3,7 @@ import Filter from "../components/Filter";
 
 function Layout() {
   return (
-    <div className="mx-auto min-w-container xl:max-w-container h-96 text-white mt-main pt-12">
+    <div className="w-full xl:mx-auto min-w-container xl:max-w-container  text-white mt-main pt-12 overflow-hidden">
       <Filter />
       <Outlet />
     </div>
