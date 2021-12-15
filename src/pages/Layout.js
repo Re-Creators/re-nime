@@ -1,9 +1,9 @@
 import { Outlet } from "react-router";
-import Filter from "../components/Filter";
+import Filter from "../components/filters/Filter";
 
 function Layout() {
   return (
-    <div className="w-full xl:mx-auto min-w-container xl:max-w-container  text-white mt-main pt-12 overflow-hidden">
+    <div className="w-full xl:mx-auto min-w-container xl:max-w-container  text-white mt-5 lg:mt-main lg:pt-12 overflow-hidden">
       <Filter />
       <Outlet />
     </div>

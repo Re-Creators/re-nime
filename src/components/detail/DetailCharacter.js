@@ -17,7 +17,7 @@ function DetailCharacter() {
   return (
     <div>
       {data.Media.characters.edges.length > 0 && (
-        <div className="grid grid-cols-2 gap-4 mt-4 text-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4 text-white">
           {data.Media.characters.edges.map((char) => (
             <CharacterCard
               key={char.id}

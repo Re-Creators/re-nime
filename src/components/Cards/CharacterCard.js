@@ -14,11 +14,13 @@ function CharacterCard({
     <div className="bg-primary flex h-detail-card">
       {/* Character */}
       <div className="w-1/2 flex gap-2">
-        <img
-          src={charImg}
-          alt=""
-          className="h-full object-cover object-center w-16"
-        />
+        <Link to={`/character/${id}/${generateSlug(charName)}`}>
+          <img
+            src={charImg}
+            alt=""
+            className="h-full object-cover object-center w-16"
+          />
+        </Link>
         <div className="h-full flex flex-col py-2">
           <Link
             to={`/character/${id}/${generateSlug(charName)}`}
@@ -39,10 +41,7 @@ function CharacterCard({
           className="h-full object-cover object-center w-16"
         />
         <div className="h-full flex flex-col py-2">
-          <Link
-            to={"/anime/8343/monogatari"}
-            className="hover:text-active text-xs"
-          >
+          <Link to="#" className="hover:text-active text-xs">
             {vaName}
           </Link>
           <div className="mt-auto text-xs text-right text-gray-400">

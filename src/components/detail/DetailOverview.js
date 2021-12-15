@@ -4,12 +4,21 @@ import RelationCard from "../Cards/RelationCard";
 import CharacterCard from "../Cards/CharacterCard";
 import StaffCard from "../Cards/StaffCard";
 import RelationCardSmall from "../Cards/RelationCardSmall";
+import parse from "html-react-parser";
 
-function DetailOverview({ tes }) {
+function DetailOverview() {
   const { data } = useContext(DetailContext);
-  console.log(data);
   return (
     <div className="text-white">
+      {data && (
+        <div className="md:hidden text-white mb-3">
+          <h2 className="my-3">Description</h2>
+          <div className="bg-primary p-5 text-sm">
+            {parse(data.description)}
+          </div>
+        </div>
+      )}
+
       {/* Relations preview */}
       {data.relations.edges.length > 0 && (
         <div className="mb-3">
@@ -57,7 +66,7 @@ function DetailOverview({ tes }) {
                 charName={char.node.name.userPreferred}
                 charRole={char.role}
                 vaImg={char.voiceActors[0]?.image.large}
-                va={char.voiceActors[0]?.name.userPreferred}
+                vaName={char.voiceActors[0]?.name.userPreferred}
                 vaLang={char.voiceActors[0]?.language}
               />
             ))}

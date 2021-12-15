@@ -13,7 +13,7 @@ function DetailStaff() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
-    <div className="grid grid-cols-2 gap-4 mt-4 text-white">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4 text-white">
       {data.Media.staff.edges.map((staff) => (
         <StaffCard
           img={staff.node.image.large}

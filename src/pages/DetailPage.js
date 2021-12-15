@@ -4,7 +4,6 @@ import { AiFillStar, AiFillHeart } from "react-icons/ai";
 import { useQuery } from "@apollo/client";
 import { DETAIL_ANIME } from "../graphql/querySchema";
 import { DetailContext } from "../context/detailContext";
-import parse from "html-react-parser";
 
 function DetailPage() {
   const { id } = useParams();
@@ -112,14 +111,21 @@ function DetailPage() {
                 {data.Media.season} {data.Media.seasonYear}
               </div>
             </div>
-            <div className="mb-3">
-              <div className="font-semibold">Average Score</div>
-              <div className="text-sm">{data.Media.averageScore}%</div>
-            </div>
-            <div className="mb-3">
-              <div className="font-semibold">Mean Score</div>
-              <div className="text-sm">{data.Media.meanScore}%</div>
-            </div>
+
+            {data.Media.averageScore && (
+              <div className="mb-3">
+                <div className="font-semibold">Average Score</div>
+                <div className="text-sm">{data.Media.averageScore}%</div>
+              </div>
+            )}
+
+            {data.Media.meanScore && (
+              <div className="mb-3">
+                <div className="font-semibold">Mean Score</div>
+                <div className="text-sm">{data.Media.meanScore}%</div>
+              </div>
+            )}
+
             <div className="mb-3">
               <div className="font-semibold">Popularity</div>
               <div className="text-sm">{data.Media.popularity}</div>
@@ -190,13 +196,6 @@ function DetailPage() {
                 ))}
               </ul>
             </div>
-          </div>
-        </div>
-
-        <div className="md:hidden text-white mb-3">
-          <h2 className="my-3">Description</h2>
-          <div className="bg-primary p-5 text-sm">
-            {parse(data.Media.description)}
           </div>
         </div>
 

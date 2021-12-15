@@ -22,8 +22,8 @@ function CharacterPage() {
 
   return (
     <div className="text-white mb-10">
-      <div className="min-h-[408px] md:mt-5 mb-24">
-        <div className="md:bg-primary h-full md:pt-12">
+      <div className="min-h-[408px] lg:mt-5 mb-24 ">
+        <div className="md:bg-primary h-full md:pt-12 px-5 xl:px-0">
           <div className="flex flex-col-reverse items-center md:items-start md:grid grid-cols-[220px_auto_auto] min-w-container xl:max-w-[1300px] md:mx-auto md:py-14 gap-5 md:gap-14">
             <img
               src={data.Character.image.large}
@@ -88,7 +88,7 @@ function CharacterPage() {
             <div className="flex flex-col relative">
               <Link
                 to="/"
-                className="rounded-md overflow-hidden h-[230px] md:h-card-result"
+                className="rounded-md overflow-hidden h-auto lg:h-card-result"
               >
                 <img
                   src={edge.node.coverImage.large}
@@ -106,7 +106,7 @@ function CharacterPage() {
                       {edge.voiceActorRoles[0].voiceActor.name.userPreferred}{" "}
                       {edge.voiceActorRoles[0].roleNotes}
                     </div>
-                    <div className="absolute top-0 md:top-[180px] right-0 w-[65px] h-[85px] border-t-4 border-l-4 border-primary box-border cursor-pointer transform hover:scale-105 transition duration-300 rounded-sm">
+                    <div className="absolute top-0 lg:top-[180px] right-0 w-[65px] h-[85px] border-t-4 border-l-4 border-primary box-border cursor-pointer transform hover:scale-105 transition duration-300 rounded-sm">
                       <img
                         src={edge.voiceActorRoles[0].voiceActor.image.large}
                         alt=""

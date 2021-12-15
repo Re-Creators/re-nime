@@ -3,12 +3,12 @@ import { IoIosClose } from "react-icons/io";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsTagsFill } from "react-icons/bs";
 import { FaSlidersH } from "react-icons/fa";
-import Dropdown from "./Dropdown";
-import filterData from "../data/filterData";
-import useWindowSize from "../hooks/useWindowSize";
-import FilterSelectedItem from "./filters/FilterSelectedItem";
+import Dropdown from "../Dropdown";
+import filterData from "../../data/filterData";
+import useWindowSize from "../../hooks/useWindowSize";
+import FilterSelectedItem from "./FilterSelectedItem";
 import { useSelector } from "react-redux";
-import { selectTitle } from "../features/filter/filterSlice";
+import { selectTitle } from "../../features/filter/filterSlice";
 import {
   useLocation,
   useNavigate,
@@ -111,7 +111,9 @@ function Filter() {
   return (
     <div className="lg:mb-8">
       {title && (
-        <h1 className="lg:mb-10 text-3xl font-bold capitalize">{title}</h1>
+        <h1 className="mb-4 ml-3 lg:ml-0 lg:mb-10 text-3xl font-bold capitalize">
+          {title}
+        </h1>
       )}
 
       {windowSize.width < 1036 && (
