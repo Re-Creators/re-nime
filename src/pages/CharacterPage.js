@@ -22,22 +22,22 @@ function CharacterPage() {
 
   return (
     <div className="text-white mb-10">
-      <div className="min-h-[408px] mt-5 mb-24">
-        <div className="bg-primary h-full pt-12">
-          <div className="grid grid-cols-[220px_auto_auto] min-w-container xl:max-w-[1300px] mx-auto py-14 gap-14">
+      <div className="min-h-[408px] md:mt-5 mb-24">
+        <div className="md:bg-primary h-full md:pt-12">
+          <div className="flex flex-col-reverse items-center md:items-start md:grid grid-cols-[220px_auto_auto] min-w-container xl:max-w-[1300px] md:mx-auto md:py-14 gap-5 md:gap-14">
             <img
               src={data.Character.image.large}
               alt=""
-              className="absolute rounded-md shadow-md"
+              className="w-[210px] md:w-auto md:absolute rounded-md shadow-md"
             />
-            <div></div>
+            <div className="bg-primary absolute w-full h-[200px] top-0 left-0 -z-10 md:bg-transparent md:static"></div>
             <div className="">
               <h1 className="text-4xl font-semibold">
                 {data.Character.name.full}
               </h1>
               <h3 className="mt-2">{data.Character.name.native}</h3>
             </div>
-            <div>
+            <div className="self-end md:self-start m-2 md:m-0">
               <button className="ml-auto bg-red-600 px-3 py-2 flex items-center gap-2 rounded-md ">
                 <AiFillHeart className="text-white" />{" "}
                 {data.Character.favourites}
@@ -45,7 +45,7 @@ function CharacterPage() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-[220px_auto] min-w-container xl:max-w-[1300px] mx-auto gap-14">
+        <div className="flex md:grid px-5 md:px-0 grid-cols-[220px_auto] min-w-container xl:max-w-[1300px] md:mx-auto md:gap-14">
           <div></div>
           <div className="mt-3">
             {data.Character.dateOfBirth.month && (
@@ -78,15 +78,18 @@ function CharacterPage() {
           </div>
         </div>
       </div>
-      <div className="mt-5 min-w-container mx-auto xl:max-w-[1300px]">
+      <div className="px-5 mt-5 min-w-container mx-auto xl:max-w-[1300px]">
         <div className="text-right mb-2">Japanese</div>
         <div
-          className="grid grid-cols-results justify-between gap-4
+          className="grid-container justify-between gap-8 md:gap-5
         "
         >
           {data.Character.media.edges.map((edge) => (
             <div className="flex flex-col relative">
-              <Link to="/" className="h-card-result">
+              <Link
+                to="/"
+                className="rounded-md overflow-hidden h-[230px] md:h-card-result"
+              >
                 <img
                   src={edge.node.coverImage.large}
                   alt=""
@@ -94,14 +97,16 @@ function CharacterPage() {
                 />
               </Link>
               <div>
-                <Link to="/">{edge.node.title.userPreferred}</Link>
+                <Link to="/" className="card-text">
+                  {edge.node.title.userPreferred}
+                </Link>
                 {edge.voiceActorRoles.length > 0 && (
                   <div className="text-xs ">
-                    <div>
+                    <div className="">
                       {edge.voiceActorRoles[0].voiceActor.name.userPreferred}{" "}
                       {edge.voiceActorRoles[0].roleNotes}
                     </div>
-                    <div className="absolute top-[180px] right-0 w-[65px] h-[85px] border-t-4 border-l-4 border-primary box-border cursor-pointer transform hover:scale-105 transition duration-300 rounded-sm">
+                    <div className="absolute top-0 md:top-[180px] right-0 w-[65px] h-[85px] border-t-4 border-l-4 border-primary box-border cursor-pointer transform hover:scale-105 transition duration-300 rounded-sm">
                       <img
                         src={edge.voiceActorRoles[0].voiceActor.image.large}
                         alt=""

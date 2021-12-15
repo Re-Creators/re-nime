@@ -7,7 +7,7 @@ import RelationCardSmall from "../Cards/RelationCardSmall";
 
 function DetailOverview({ tes }) {
   const { data } = useContext(DetailContext);
-
+  console.log(data);
   return (
     <div className="text-white">
       {/* Relations preview */}
@@ -18,6 +18,7 @@ function DetailOverview({ tes }) {
             <div className="flex  flex-wrap gap-5">
               {data.relations.edges.map((relation) => (
                 <RelationCardSmall
+                  img={relation.node.coverImage.large}
                   key={relation.id}
                   type={relation.node.type}
                   relationType={relation.relationType}
@@ -27,9 +28,10 @@ function DetailOverview({ tes }) {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4 mt-4">
+            <div className="flex overflow-x-auto md:grid grid-cols-2 gap-4 mt-4">
               {data.relations.edges.map((relation) => (
                 <RelationCard
+                  img={relation.node.coverImage.large}
                   key={relation.id}
                   type={relation.node.type}
                   relationType={relation.relationType}
@@ -46,7 +48,7 @@ function DetailOverview({ tes }) {
       {data.characterPreview.edges.length > 0 && (
         <div className="mb-3">
           <h1>Characters</h1>
-          <div className="grid grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             {data.characterPreview.edges.map((char) => (
               <CharacterCard
                 key={char.id}
@@ -66,7 +68,7 @@ function DetailOverview({ tes }) {
       {/* Staff preview */}
       <div className="mb-3">
         <h1>Staff</h1>
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {data.staffPreview.edges.map((staff) => (
             <StaffCard
               key={staff.id}

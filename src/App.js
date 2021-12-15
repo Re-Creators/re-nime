@@ -12,11 +12,15 @@ import NotFound from "./pages/NotFound";
 import FilterResultPage from "./pages/FilterResultPage";
 import BaseSearchPage from "./pages/BaseSearchPage";
 import CharacterPage from "./pages/CharacterPage";
+import useWindowSize from "./hooks/useWindowSize";
 
 function App() {
+  const windowSize = useWindowSize();
+
   return (
     <div className="App ">
-      <Navbar />
+      {windowSize.width > 1024 && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
