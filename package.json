@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.5",
-    "@craco/craco": "^6.4.2",
     "@reduxjs/toolkit": "^1.6.2",
     "@tailwindcss/line-clamp": "^0.3.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -16,9 +15,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-intersection-observer": "^8.32.5",
     "react-markdown": "^7.1.1",
-    "react-onclickoutside": "^6.12.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
