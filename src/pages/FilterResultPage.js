@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { FILTER_ANIME } from "../graphql/querySchema";
-import { generateSlug } from "../utils";
 import CustomTippy from "../components/CustomTippy";
 import { getDate } from "../utils";
 import { useDispatch } from "react-redux";
@@ -10,6 +8,7 @@ import { setTitle } from "../features/filter/filterSlice";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import { getFilterData } from "../utils";
 import CardLoader from "../components/loader/CardLoader";
+import LandingCard from "../components/Cards/LandingCard";
 
 function FilterResultPage({ filter, isRanked }) {
   const filterData = getFilterData(filter);
@@ -23,7 +22,7 @@ function FilterResultPage({ filter, isRanked }) {
   );
 
   const dispatch = useDispatch();
-
+  console.log("render");
   useEffect(() => {
     if (!error) {
       dispatch(setTitle(filterData.title));
@@ -53,36 +52,16 @@ function FilterResultPage({ filter, isRanked }) {
                 list.season
               )}
             >
-              <div
-                className="group cursor-pointer relative"
-                ref={animeData.media.length - 1 === index && setLastElement}
-              >
-                {isRanked && index < 100 && (
-                  <div className="absolute z-20 -top-2 -left-2 w-[38px] h-[38px] bg-red-600 rounded-full  p-2 font-bold flex justify-center items-center text-sm ">
-                    #{index + 1}
-                  </div>
-                )}
-
-                <Link
-                  to={`/anime/${list.id}/${generateSlug(
-                    list.title.userPreferred
-                  )}`}
-                  className=" relative"
-                >
-                  <div className="card-height mb-3 overflow-hidden">
-                    <img
-                      src={list.coverImage.large}
-                      alt=""
-                      className="w-full h-full object-cover rounded-md"
-                    />
-                  </div>
-                  <div className="mt-2 group-hover:text-active text-xs md:text-base line-clamp-2">
-                    {list.title.userPreferred}
-                  </div>
-                </Link>
-              </div>
+              <LandingCard
+                id={list.id}
+                title={list.title.userPreferred}
+                img={list.coverImage.large}
+                isRanked={isRanked}
+                rank={index + 1}
+              />
             </CustomTippy>
           ))}
+      <div ref={animeData && setLastElement}></div>
     </div>
   );
 }

@@ -1,12 +1,13 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { FILTER_ANIME } from "../graphql/querySchema";
-import { generateSlug, transformVariable } from "../utils";
+import { transformVariable } from "../utils";
 import CustomTippy from "../components/CustomTippy";
 import { getDate } from "../utils";
 import { useMemo } from "react";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import Loading from "../components/loader/Loading";
+import LandingCard from "../components/Cards/LandingCard";
 
 function SearchAnime() {
   const [searchParams] = useSearchParams();
@@ -63,28 +64,12 @@ function SearchAnime() {
               list.season
             )}
           >
-            <div
-              className="group cursor-pointer"
+            <LandingCard
+              id={list.id}
+              title={list.title.userPreferred}
+              img={list.coverImage.large}
               ref={animeData.media.length - 1 === index && setLastElement}
-            >
-              <Link
-                to={`/anime/${list.id}/${generateSlug(
-                  list.title.userPreferred
-                )}`}
-                className=" relative"
-              >
-                <div className="mb-3 w-full card-height overflow-hidden">
-                  <img
-                    src={list.coverImage.large}
-                    alt=""
-                    className="w-full h-full object-cover rounded-md"
-                  />
-                </div>
-                <div className="card-text mt-2 group-hover:text-active">
-                  {list.title.userPreferred}
-                </div>
-              </Link>
-            </div>
+            />
           </CustomTippy>
         ))}
     </div>

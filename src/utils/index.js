@@ -55,7 +55,6 @@ export const getFilterData = (state) => {
   } else if (state === "this-season") {
     const currentYear = new Date().getFullYear();
     const currentSeason = getCurrentSeason();
-    console.log(currentSeason);
     return {
       title: `${currentSeason.toLowerCase()} Anime ${currentYear}`,
       variable: {

@@ -1,9 +1,11 @@
 import CustomTippy from "./CustomTippy";
 import { Link } from "react-router-dom";
-import { getDate, generateSlug } from "../utils/index";
+import { getDate } from "../utils/index";
 import CardLoader from "./loader/CardLoader";
+import LandingCard from "./Cards/LandingCard";
 
 function LandingSection({ title, lists, segment }) {
+  console.log("render");
   return (
     <div className="">
       <div className="flex justify-between">
@@ -37,29 +39,11 @@ function LandingSection({ title, lists, segment }) {
                   list.season
                 )}
               >
-                <div className="group cursor-pointer w-full grid grid-rows-min-content relative md:last:hidden">
-                  <Link
-                    to={`/anime/${list.id}/${generateSlug(
-                      list.title.userPreferred
-                    )}`}
-                    className="card-height w-full relative"
-                  >
-                    <img
-                      src={list.coverImage.large}
-                      alt=""
-                      className="absolute top-0 left-0 w-full h-full object-cover object-center rounded-md"
-                    />
-                  </Link>
-                  <Link
-                    to={`/anime/${list.id}/${generateSlug(
-                      list.title.userPreferred
-                    )}`}
-                  >
-                    <div className="card-text mt-2 group-hover:text-active ">
-                      {list.title.userPreferred}
-                    </div>
-                  </Link>
-                </div>
+                <LandingCard
+                  id={list.id}
+                  title={list.title.userPreferred}
+                  img={list.coverImage.large}
+                />
               </CustomTippy>
             ))}
       </div>

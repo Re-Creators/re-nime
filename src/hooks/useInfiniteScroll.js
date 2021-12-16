@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
+const options = {
+  threshold: 0.25,
+};
 export default function useInfiniteScroll(fetchData, initialData) {
   const [lastElement, setLastElement] = useState(null);
   const [incomingLoading, setIncomingLoading] = useState(false);
@@ -43,9 +46,10 @@ export default function useInfiniteScroll(fetchData, initialData) {
     observer.current = new IntersectionObserver((entries) => {
       const first = entries[0];
       if (first.isIntersecting && !waitObserve.current && hasNextPage.current) {
+        console.log("Fetch");
         fetchingMoreData();
       }
-    });
+    }, options);
 
     if (currentElement) {
       observer.current.observe(currentElement);
