@@ -4,6 +4,7 @@ import { AiFillStar, AiFillHeart } from "react-icons/ai";
 import { useQuery } from "@apollo/client";
 import { DETAIL_ANIME } from "../graphql/querySchema";
 import { DetailContext } from "../context/detailContext";
+import Loading from "../components/loader/Loading";
 
 function DetailPage() {
   const { id } = useParams();
@@ -36,9 +37,8 @@ function DetailPage() {
     return "Unknown";
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading center />;
   if (error) return <p>Error :(</p>;
-
   return (
     <div>
       <DetailHeader
@@ -199,7 +199,7 @@ function DetailPage() {
           </div>
         </div>
 
-        <div>
+        <div className="relative">
           {/* Content tab */}
           <DetailContext.Provider value={{ data: data.Media }}>
             <Outlet />

@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { CHARACTER_INFO } from "../graphql/querySchema";
 import { getMonthName } from "../utils";
 import ReactMarkdown from "react-markdown";
+import Loading from "../components/loader/Loading";
 
 function CharacterPage() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ function CharacterPage() {
       withRoles: true,
     },
   });
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading center />;
   if (error) return <p>Error :(</p>;
 
   return (

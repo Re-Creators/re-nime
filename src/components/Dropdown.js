@@ -55,7 +55,7 @@ function Dropdown({
   }
 
   return (
-    <div>
+    <div className="">
       <div className="capitalize">{title}</div>
       {/* Input */}
       <div className="relative mt-3">

@@ -109,7 +109,7 @@ function Filter() {
   }
 
   return (
-    <div className="lg:mb-8">
+    <div className="lg:mb-8 z-50">
       {title && (
         <h1 className="mb-4 ml-3 lg:ml-0 lg:mb-10 text-3xl font-bold capitalize">
           {title}

@@ -1,4 +1,7 @@
-export function getCurrentSeason() {
+export const convertDayFromSecond = (second) =>
+  Math.floor(second / 86400) + " day";
+
+export const getCurrentSeason = () => {
   const currentMonth = new Date().getMonth();
   if (currentMonth >= 1 && currentMonth <= 3) {
     return "WINTER";
@@ -8,9 +11,9 @@ export function getCurrentSeason() {
     return "SUMMER";
   }
   return "FALL";
-}
+};
 
-export function getNextSeason() {
+export const getNextSeason = () => {
   const currentSeason = getCurrentSeason();
 
   if (currentSeason === "WINTER") {
@@ -21,4 +24,13 @@ export function getNextSeason() {
     return "FALL";
   }
   return "WINTER";
-}
+};
+
+export const capitalFirstWord = (str) => {
+  if (!str) {
+    return "";
+  }
+
+  let lowerCaseStr = str.toLowerCase();
+  return str.at(0).toUpperCase() + lowerCaseStr.slice(1);
+};

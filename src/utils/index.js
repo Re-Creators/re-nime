@@ -1,28 +1,25 @@
-import { getCurrentSeason } from "./helper";
-import { getNextSeason } from "./helper";
+import {
+  getCurrentSeason,
+  getNextSeason,
+  capitalFirstWord,
+  convertDayFromSecond,
+} from "./helper";
 
-function convertDayFromSecond(second) {
-  return Math.floor(second / 86400) + " day";
-}
-
-function capitalFirstWord(str) {
-  if (!str) {
-    return "";
-  }
-
-  let lowerCaseStr = str.toLowerCase();
-  return str.at(0).toUpperCase() + lowerCaseStr.slice(1);
-}
-
-export function truncateString(str, num) {
+export const truncateString = (str, num) => {
   if (str?.length > num) {
     return str.slice(0, num) + "...";
   } else {
     return str;
   }
-}
+};
 
-export function getDate(status, nextAiringEpisode, startDate, endDate, season) {
+export const getDate = (
+  status,
+  nextAiringEpisode,
+  startDate,
+  endDate,
+  season
+) => {
   if (startDate.year === null) return null;
 
   if (status === "RELEASING" && nextAiringEpisode) {
@@ -38,14 +35,14 @@ export function getDate(status, nextAiringEpisode, startDate, endDate, season) {
   }
 
   return `${capitalFirstWord(season)} ${startDate.year}`;
-}
+};
 
-export function generateSlug(name) {
+export const generateSlug = (name) => {
   const clearedPunctuation = name.replace(/[.,°'/#!$%^&*;×:{}=\-_`~()]/g, "");
   return clearedPunctuation.replaceAll(" ", "-");
-}
+};
 
-export function getFilterData(state) {
+export const getFilterData = (state) => {
   if (state === "trending") {
     return {
       title: "Trending",
@@ -97,9 +94,9 @@ export function getFilterData(state) {
       variable: { page: 1, type: "ANIME", sort: "SCORE_DESC" },
     };
   }
-}
+};
 
-export function transformVariable(key, arr) {
+export const transformVariable = (key, arr) => {
   if (key === "season") {
     return arr.map((item) => item.toUpperCase());
   } else if (key === "format") {
@@ -115,9 +112,9 @@ export function transformVariable(key, arr) {
   }
 
   return arr;
-}
+};
 
-export function getMonthName(monthNum) {
+export const getMonthName = (monthNum) => {
   const months = [
     "Jan",
     "Feb",
@@ -134,4 +131,4 @@ export function getMonthName(monthNum) {
   ];
 
   return months[monthNum - 1];
-}
+};

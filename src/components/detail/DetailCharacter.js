@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { CHARACTER_LIST } from "../../graphql/querySchema";
 import CharacterCard from "../Cards/CharacterCard";
+import Loading from "../loader/Loading";
 
 function DetailCharacter() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function DetailCharacter() {
     },
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <p>Error :(</p>;
   return (
     <div>

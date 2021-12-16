@@ -6,6 +6,7 @@ import CustomTippy from "../components/CustomTippy";
 import { getDate } from "../utils";
 import { useMemo } from "react";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import Loading from "../components/loader/Loading";
 
 function SearchAnime() {
   const [searchParams] = useSearchParams();
@@ -17,7 +18,7 @@ function SearchAnime() {
         const tranformed = transformVariable(key, searchParams.getAll(key));
         initVariable[key] = tranformed;
       } else if (key === "year") {
-        initVariable[key] = parseInt(value);
+        initVariable[key] = value + "%";
       } else if (key === "season") {
         initVariable[key] = value.toUpperCase();
       } else {
@@ -36,10 +37,16 @@ function SearchAnime() {
     data
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="relative min-h-[400px]">
+        <Loading />
+      </div>
+    );
   if (error) return <p>Error :(</p>;
   if (data.Page.media.length <= 0)
     return <div className="text-white text-center text-3xl">No Result</div>;
+
   return (
     <div className="grid-container mt-5 gap-5 px-2">
       {animeData &&

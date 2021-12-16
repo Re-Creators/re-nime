@@ -15,6 +15,7 @@ import { AiFillStar, AiFillHeart } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { STATS_INFO } from "../../graphql/querySchema";
+import Loading from "../loader/Loading";
 
 function DetailStats() {
   const { id } = useParams();
@@ -24,8 +25,9 @@ function DetailStats() {
     },
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <p>Error :(</p>;
+
   return (
     <div className="text-white">
       {/* Rankings */}
