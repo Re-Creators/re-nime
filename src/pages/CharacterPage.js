@@ -6,6 +6,7 @@ import { CHARACTER_INFO } from "../graphql/querySchema";
 import { getMonthName } from "../utils";
 import ReactMarkdown from "react-markdown";
 import Loading from "../components/loader/Loading";
+import { useEffect } from "react";
 
 function CharacterPage() {
   const { id } = useParams();
@@ -18,6 +19,13 @@ function CharacterPage() {
       withRoles: true,
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      document.title = `${data.Character.name.full} · Renime`;
+    }
+  }, [data]);
+
   if (loading) return <Loading center />;
   if (error) return <p>Error :(</p>;
 

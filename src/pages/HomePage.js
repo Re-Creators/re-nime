@@ -4,6 +4,7 @@ import { HOME_LIST_QUERY } from "../graphql/querySchema";
 import useWindowSize from "../hooks/useWindowSize";
 import TopAnimeMobile from "../components/home/TopAnimeMobile";
 import TopAnimeDesktop from "../components/home/TopAnimeDesktop";
+import { useEffect } from "react";
 function HomePage() {
   const { error, data } = useQuery(HOME_LIST_QUERY, {
     variables: {
@@ -15,6 +16,11 @@ function HomePage() {
     },
   });
   const size = useWindowSize();
+
+  useEffect(() => {
+    document.title = "Renime : Discover Anime";
+  }, []);
+
   if (error) return <p>Error :(</p>;
   return (
     <div className="w-full flex flex-col px-4 md:px-0 gap-10 mb-96">

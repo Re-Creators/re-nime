@@ -10,10 +10,7 @@ function StaffCard({ img, name, role }) {
           className="h-full object-cover object-center w-16"
         />
         <div className="h-full flex flex-col py-2">
-          <Link
-            to="/anime/8343/monogatari"
-            className="hover:text-active text-xs"
-          >
+          <Link to="#" className="hover:text-active text-xs">
             {name}
           </Link>
           <div className="mt-auto text-xs text-gray-400">{role}</div>

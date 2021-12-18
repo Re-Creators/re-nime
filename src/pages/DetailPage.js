@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { DETAIL_ANIME } from "../graphql/querySchema";
 import { DetailContext } from "../context/detailContext";
 import Loading from "../components/loader/Loading";
+import { useEffect } from "react";
 
 function DetailPage() {
   const { id } = useParams();
@@ -36,6 +37,12 @@ function DetailPage() {
     }
     return "Unknown";
   };
+
+  useEffect(() => {
+    if (data) {
+      document.title = `${data.Media.title.userPreferred} · Renime`;
+    }
+  }, [data]);
 
   if (loading) return <Loading center />;
   if (error) return <p>Error :(</p>;

@@ -5,7 +5,6 @@ import CardLoader from "./loader/CardLoader";
 import LandingCard from "./Cards/LandingCard";
 
 function LandingSection({ title, lists, segment }) {
-  console.log("render");
   return (
     <div className="">
       <div className="flex justify-between">

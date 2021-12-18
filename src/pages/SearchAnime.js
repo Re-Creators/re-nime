@@ -4,7 +4,7 @@ import { FILTER_ANIME } from "../graphql/querySchema";
 import { transformVariable } from "../utils";
 import CustomTippy from "../components/CustomTippy";
 import { getDate } from "../utils";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import Loading from "../components/loader/Loading";
 import LandingCard from "../components/Cards/LandingCard";
@@ -28,6 +28,10 @@ function SearchAnime() {
     });
     return initVariable;
   }, [searchParams]);
+
+  useEffect(() => {
+    document.title = `Search Anime · Renime`;
+  });
 
   const { data, loading, error, fetchMore } = useQuery(FILTER_ANIME, {
     variables: variables,

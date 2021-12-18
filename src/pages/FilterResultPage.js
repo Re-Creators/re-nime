@@ -22,8 +22,9 @@ function FilterResultPage({ filter, isRanked }) {
   );
 
   const dispatch = useDispatch();
-  console.log("render");
+
   useEffect(() => {
+    document.title = `${filterData.title} · Renime`;
     if (!error) {
       dispatch(setTitle(filterData.title));
     }
