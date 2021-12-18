@@ -67,7 +67,10 @@ function Dropdown({
             }}
           />
         ) : (
-          <IoIosArrowDown className="w-4 h-4 abs-center right-3 icon-input cursor-pointer" />
+          <IoIosArrowDown
+            className="w-4 h-4 abs-center right-3 icon-input cursor-pointer"
+            onClick={() => setShowOption(true)}
+          />
         )}
 
         {!inputFocus && selectedItem.length > 0 && (

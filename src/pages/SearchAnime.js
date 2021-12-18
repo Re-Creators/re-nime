@@ -76,6 +76,7 @@ function SearchAnime() {
             />
           </CustomTippy>
         ))}
+      <div ref={animeData && setLastElement}></div>
     </div>
   );
 }
