@@ -32,5 +32,5 @@ export const capitalFirstWord = (str) => {
   }
 
   let lowerCaseStr = str.toLowerCase();
-  return str.at(0).toUpperCase() + lowerCaseStr.slice(1);
+  return str[0].toUpperCase() + lowerCaseStr.slice(1);
 };

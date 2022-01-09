@@ -39,7 +39,7 @@ export const getDate = (
 
 export const generateSlug = (name) => {
   const clearedPunctuation = name.replace(/[.,°'/#!$%^&*;×:{}=\-_`~()]/g, "");
-  return clearedPunctuation.replaceAll(" ", "-");
+  return clearedPunctuation.replace(/ /g, "-");
 };
 
 export const getFilterData = (state) => {
